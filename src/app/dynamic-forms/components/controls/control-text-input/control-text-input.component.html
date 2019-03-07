@@ -1,0 +1,4 @@
+<div *ngIf="control">
+  <label *ngIf="control.title">{{control.title}}</label>
+  <input type="text" [attr.disabled]="disabled" [value]="inputValue" (input)="onInput($event.target.value)">
+</div>
