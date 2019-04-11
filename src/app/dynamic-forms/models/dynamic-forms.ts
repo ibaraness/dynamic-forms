@@ -12,6 +12,7 @@ export interface DynamicControlOptions {
   defaultValue?: any;
   type: string;
   tags?: string[];
+  options?: {[optionName: string]: string};
 }
 
 export interface DynamicFormsControlAdapter {

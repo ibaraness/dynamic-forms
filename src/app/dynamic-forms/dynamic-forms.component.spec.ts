@@ -1,29 +1,6 @@
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
 import { DynamicFormsComponent } from "./dynamic-forms.component";
-import { DynamicControlDirective } from "./directives/dynamic-control.directive";
-import { ControlAdapterTextInputComponent } from "./components/controls/control-text-input/control-adapter-text-input/control-adapter-text-input.component";
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { ControlTextInputComponent } from "./components/controls/control-text-input/control-text-input.component";
-
-@NgModule({
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
-  declarations: [
-    ControlAdapterTextInputComponent,
-    DynamicControlDirective,
-    DynamicFormsComponent,
-    ControlTextInputComponent
-  ],
-  entryComponents: [ControlAdapterTextInputComponent],
-  exports: [
-    ControlAdapterTextInputComponent,
-    DynamicControlDirective,
-    DynamicFormsComponent
-  ]
-})
-export class TestModule {}
 
 describe("DynamicFormsComponent", () => {
   let component: DynamicFormsComponent;
@@ -31,8 +8,8 @@ describe("DynamicFormsComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [TestModule],
-      declarations: []
+      declarations: [DynamicFormsComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
@@ -44,5 +21,16 @@ describe("DynamicFormsComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
+  });
+
+  it("should create dynamic form", () => {
+    expect(component.form).toBeTruthy();
+  });
+
+  it("should emit formReady when form is ready", () => {
+    spyOn(component.formReady, "emit");
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(component.formReady.emit).toHaveBeenCalled();
   });
 });

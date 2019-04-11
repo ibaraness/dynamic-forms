@@ -4,6 +4,7 @@ import { ControlAdapterTextInputComponent } from "./control-adapter-text-input.c
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl } from "@angular/forms";
 import { ControlTextInputComponent } from "../control-text-input.component";
 import { DynamicControlOptions } from "src/app/dynamic-forms/models/dynamic-forms";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 describe("ControlAdapterTextInputComponent", () => {
   let component: ControlAdapterTextInputComponent;
@@ -11,13 +12,22 @@ describe("ControlAdapterTextInputComponent", () => {
   let formGroup: FormGroup;
   let control: DynamicControlOptions;
 
+  // beforeEach(async(() => {
+  //   TestBed.configureTestingModule({
+  //     imports: [ReactiveFormsModule, FormsModule],
+  //     declarations: [
+  //       ControlTextInputComponent,
+  //       ControlAdapterTextInputComponent
+  //     ]
+  //   }).compileComponents();
+  // }));
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, FormsModule],
       declarations: [
-        ControlTextInputComponent,
         ControlAdapterTextInputComponent
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
@@ -34,20 +44,30 @@ describe("ControlAdapterTextInputComponent", () => {
       [control.id]: new FormControl()
     });
 
+
+  });
+
+  it("should create when has a valid form and control", () => {
     component.form = formGroup;
     component.control = control;
-
     fixture.detectChanges();
-  });
-
-  it("should create", () => {
     expect(component).toBeTruthy();
   });
 
-  it("should not be created without form", () => {
-    component.form = undefined;
-    fixture.detectChanges();
-    expect(component).toBeTruthy();
+  it("should fail with an error without a valid form", () => {
+    const test = () => {
+      component.form = undefined;
+      fixture.detectChanges();
+    };
+    expect(test).toThrowError();
+  });
+
+  it("should fail with template error without a valid control", () => {
+    const test = () => {
+      component.form = formGroup;
+      fixture.detectChanges();
+    };
+    expect(test).toThrowError();
   });
 
 });

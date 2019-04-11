@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { DynamicControlOptions, DynamicFormsControlGroup } from "./models/dynamic-forms";
+import { getContrtolsFromGroups } from "./utils/utils";
 
 @Component({
   selector: "app-dynamic-forms",
@@ -11,22 +12,18 @@ export class DynamicFormsComponent implements OnInit {
   @Input() controlGroups: DynamicFormsControlGroup[];
   @Output() formReady: EventEmitter<FormGroup> = new EventEmitter();
   public form: FormGroup;
-  // public control: DynamicControlOptions = {
-  //   id: "first_name",
-  //   title: "First Name",
-  //   type: "textbox"
-  // };
-  constructor() {}
 
   ngOnInit() {
-    const controls = {
-      text1: new FormControl(),
-      first_name: new FormControl("idan")
-    };
-    this.form = new FormGroup(controls);
+    this.createForm();
+  }
+
+  createForm(): void {
+    const controlsObj = {};
+    const controls = this.controlGroups && getContrtolsFromGroups(this.controlGroups) || [];
+    controls.forEach(control => {
+      controlsObj[control.id] = new FormControl();
+    });
+    this.form = new FormGroup(controlsObj);
     this.formReady.emit(this.form);
-    // this.form.valueChanges.subscribe(values => {
-    //   console.log("values", values);
-    // });
   }
 }

@@ -8,8 +8,8 @@ import {
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { DynamicControlOptions } from "src/app/dynamic-forms/models/dynamic-forms";
-import { DynamicFormsControlAdapter } from "../models/dynamic-forms";
-import { dynamicControlAdapters } from "../config/dynamic-control-adapters.config";
+import { DynamicFormsControlAdapter } from "../../models/dynamic-forms";
+import { dynamicControlAdapters } from "../../config/dynamic-control-adapters.config";
 
 @Directive({
   selector: "[appDynamicControl]"
@@ -24,11 +24,12 @@ export class DynamicControlDirective implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log("form", this.form);
     this.createControl();
   }
 
   createControl() {
-    if (!this.viewContainer || !dynamicControlAdapters[this.control.type]) {
+    if (!this.viewContainer || !this.control || !dynamicControlAdapters[this.control.type]) {
       return;
     }
     this.viewContainer.clear();

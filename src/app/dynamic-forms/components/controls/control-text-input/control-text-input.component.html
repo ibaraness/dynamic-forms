@@ -1,4 +1,11 @@
-<div *ngIf="control">
-  <label *ngIf="control.title">{{control.title}}</label>
-  <input type="text" [attr.disabled]="disabled" [value]="inputValue" (input)="onInput($event.target.value)">
+<div *ngIf="control" class="form-group">
+  <label *ngIf="control.title" [for]="control.id">{{control.title}}</label>
+  <input
+  [type]="inputType"
+  class="form-control"
+  [attr.disabled]="disabled ? '' : null"
+  [value]="inputValue"
+  (input)="onInput($event.target.value)"
+  [id]="control.id"
+  [placeholder]="control.title">
 </div>

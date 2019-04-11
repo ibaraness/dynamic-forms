@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { DynamicControlOptions, DynamicFormsControl } from "../../../models/dynamic-forms";
+import * as _ from "lodash";
 
 @Component({
   selector: "app-control-text-input",
@@ -19,12 +20,16 @@ export class ControlTextInputComponent implements OnInit, DynamicFormsControl {
 
   public inputValue: string;
   public disabled: boolean;
+  public inputType: string;
 
   onChange: (value: string) => void;
 
-  constructor() {}
+  constructor(private cdr: ChangeDetectorRef) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.inputType = _.property("options.input_type")(this.control) || "text";
+    console.log("control", _);
+  }
 
   onInput(value) {
     if (this.onChange) {
@@ -34,14 +39,19 @@ export class ControlTextInputComponent implements OnInit, DynamicFormsControl {
 
   writeValue(value: string): void {
     this.inputValue = value;
+    this.cdr.detectChanges();
   }
+
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
+
   registerOnTouched(fn: any): void {
     // Not implemented
   }
-  setDisabledState?(isDisabled: boolean): void {
+
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
+    this.cdr.detectChanges();
   }
 }

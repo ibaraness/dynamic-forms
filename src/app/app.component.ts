@@ -15,6 +15,32 @@ export class AppComponent {
           id: "first_name",
           title: "First Name",
           type: "textbox"
+        },
+        {
+          id: "last_name",
+          title: "Last Name",
+          type: "textbox"
+        },
+        {
+          id: "email",
+          title: "Email",
+          type: "textbox",
+          options: {
+            input_type: "email"
+          }
+        },
+        {
+          id: "password",
+          title: "Password",
+          type: "textbox",
+          options: {
+            input_type: "password"
+          }
+        },
+        {
+          id: "submit",
+          title: "Submit",
+          type: "submit",
         }
       ]
     }
