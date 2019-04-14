@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { DynamicControlOptions, DynamicFormsControl } from "../../../models/dynamic-forms";
 import * as _ from "lodash";
@@ -16,8 +16,12 @@ import * as _ from "lodash";
   ]
 })
 export class ControlTextInputComponent implements OnInit, DynamicFormsControl {
+  @Output() blur: EventEmitter<boolean> = new EventEmitter();
+  @Output() input: EventEmitter<string> = new EventEmitter();
   @Input() control: DynamicControlOptions;
-
+  @Input() invalid: boolean;
+  @Input() valid: boolean;
+  @Input() errorMessage: string;
   public inputValue: string;
   public disabled: boolean;
   public inputType: string;
@@ -35,6 +39,11 @@ export class ControlTextInputComponent implements OnInit, DynamicFormsControl {
     if (this.onChange) {
       this.onChange(value);
     }
+    this.input.emit(value);
+  }
+
+  onBlur() {
+    this.blur.emit(true);
   }
 
   writeValue(value: string): void {

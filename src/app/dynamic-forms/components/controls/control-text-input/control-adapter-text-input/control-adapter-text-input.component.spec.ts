@@ -1,26 +1,15 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { ControlAdapterTextInputComponent } from "./control-adapter-text-input.component";
-import { ReactiveFormsModule, FormsModule, FormGroup, FormControl } from "@angular/forms";
-import { ControlTextInputComponent } from "../control-text-input.component";
-import { DynamicControlOptions } from "src/app/dynamic-forms/models/dynamic-forms";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { DynamicControlOptions } from "src/app/dynamic-forms/models/dynamic-forms";
+import { ControlAdapterTextInputComponent } from "./control-adapter-text-input.component";
+
 
 describe("ControlAdapterTextInputComponent", () => {
   let component: ControlAdapterTextInputComponent;
   let fixture: ComponentFixture<ControlAdapterTextInputComponent>;
   let formGroup: FormGroup;
   let control: DynamicControlOptions;
-
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     imports: [ReactiveFormsModule, FormsModule],
-  //     declarations: [
-  //       ControlTextInputComponent,
-  //       ControlAdapterTextInputComponent
-  //     ]
-  //   }).compileComponents();
-  // }));
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -37,11 +26,17 @@ describe("ControlAdapterTextInputComponent", () => {
 
     control = {
       id: "control_id",
-      type: "textbox"
+      type: "textbox",
+      validations: [
+        {
+          type: "required",
+          errorMessage: "You must enter first name"
+        }
+      ]
     };
 
     formGroup = new FormGroup({
-      [control.id]: new FormControl()
+      [control.id]: new FormControl(undefined, [Validators.required])
     });
 
 
@@ -69,6 +64,10 @@ describe("ControlAdapterTextInputComponent", () => {
     };
     expect(test).toThrowError();
   });
+
+  it("should update when control is dirty", () => {
+
+  })
 
 });
 

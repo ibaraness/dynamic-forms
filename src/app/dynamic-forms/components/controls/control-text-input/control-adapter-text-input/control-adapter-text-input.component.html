@@ -1,3 +1,11 @@
 <ng-container *ngIf="form" [formGroup]="form">
-  <app-control-text-input [control]="control" [formControlName]="control.id"></app-control-text-input>
+  <app-control-text-input
+  [control]="control"
+  [formControlName]="control.id"
+  [invalid]="invalid"
+  [valid]="touched && !invalid"
+  [errorMessage]="errorMessage"
+  (blur)="validate()"
+  (input)="onInput($event)"
+  ></app-control-text-input>
 </ng-container>

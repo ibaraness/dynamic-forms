@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { DynamicControlOptions, DynamicFormsControlGroup } from "./models/dynamic-forms";
 import { getContrtolsFromGroups } from "./utils/utils";
+import { DynamicFormValidationService } from "./services/dynamic-form-validation.service";
 
 @Component({
   selector: "app-dynamic-forms",
@@ -13,6 +14,8 @@ export class DynamicFormsComponent implements OnInit {
   @Output() formReady: EventEmitter<FormGroup> = new EventEmitter();
   public form: FormGroup;
 
+  constructor(private validationService: DynamicFormValidationService) {}
+
   ngOnInit() {
     this.createForm();
   }
@@ -21,7 +24,11 @@ export class DynamicFormsComponent implements OnInit {
     const controlsObj = {};
     const controls = this.controlGroups && getContrtolsFromGroups(this.controlGroups) || [];
     controls.forEach(control => {
-      controlsObj[control.id] = new FormControl();
+      const validators = !control.validations ? [] :
+        control.validations.map(obj => this.validationService.getValidator(obj.validation))
+        .filter(v => v);
+      console.log("validators", validators);
+      controlsObj[control.id] = new FormControl(undefined, validators);
     });
     this.form = new FormGroup(controlsObj);
     this.formReady.emit(this.form);

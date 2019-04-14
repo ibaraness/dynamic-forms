@@ -5,6 +5,7 @@ import { ControlAdapterTextInputComponent } from "./components/controls/control-
 import { ControlTextInputComponent } from "./components/controls/control-text-input/control-text-input.component";
 import { DynamicControlDirective } from './directives/dynamic-control/dynamic-control.directive';
 import { DynamicFormsComponent } from "./dynamic-forms.component";
+import { DynamicFormValidationService } from "./services/dynamic-form-validation.service";
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { DynamicFormsComponent } from "./dynamic-forms.component";
   ],
   exports: [DynamicFormsComponent],
   entryComponents: [ControlAdapterTextInputComponent],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  providers: [DynamicFormValidationService]
 })
 export class DynamicFormsModule {}

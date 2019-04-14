@@ -1,7 +1,7 @@
-<ng-container *ngIf="form && controlGroups">
+<form *ngIf="form && controlGroups">
   <div *ngFor="let group of controlGroups">
     <ng-container *ngFor="let control of group.controls" appDynamicControl [control]="control" [form]="form"></ng-container>
   </div>
-</ng-container>
+</form>
 
 

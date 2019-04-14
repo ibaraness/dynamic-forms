@@ -1,3 +1,4 @@
+import { Validators } from '@angular/forms';
 import { Component } from "@angular/core";
 import { DynamicFormsControlGroup } from "./dynamic-forms/models/dynamic-forms";
 
@@ -14,7 +15,21 @@ export class AppComponent {
         {
           id: "first_name",
           title: "First Name",
-          type: "textbox"
+          type: "textbox",
+          validations: [
+            {
+              validation: "required",
+              errorMessage: "This field is required"
+            },
+            {
+              validation: "minlength-3",
+              errorMessage: "You must enter at least 3 letters"
+            },
+            {
+              validation: "only_letters",
+              errorMessage: "you must use only letters, spaces and other characters are not alowed"
+            }
+          ]
         },
         {
           id: "last_name",
@@ -27,7 +42,13 @@ export class AppComponent {
           type: "textbox",
           options: {
             input_type: "email"
-          }
+          },
+          validations: [
+            {
+              validation: "email",
+              errorMessage: "Please enter a valid email address"
+            }
+          ]
         },
         {
           id: "password",
@@ -35,13 +56,23 @@ export class AppComponent {
           type: "textbox",
           options: {
             input_type: "password"
-          }
+          },
+          validations: [
+            {
+              validation: "password",
+              errorMessage: "Password must contain at least 1 lowercase letter, 1 uppercase letter, 1 digit, and 1 special character"
+            },
+            {
+              validation: "minlength-6",
+              errorMessage: "Password must be at least 6 characters long"
+            }
+          ]
         },
         {
-          id: "submit",
-          title: "Submit",
-          type: "submit",
-        }
+          id: "terms",
+          html: "I agree to the Terms & Conditions",
+          type: "checkbox"
+        },
       ]
     }
   ];
