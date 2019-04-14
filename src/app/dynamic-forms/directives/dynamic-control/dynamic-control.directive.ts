@@ -24,7 +24,6 @@ export class DynamicControlDirective implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log("form", this.form);
     this.createControl();
   }
 

@@ -32,7 +32,6 @@ export class ControlTextInputComponent implements OnInit, DynamicFormsControl {
 
   ngOnInit() {
     this.inputType = _.property("options.input_type")(this.control) || "text";
-    console.log("control", _);
   }
 
   onInput(value) {

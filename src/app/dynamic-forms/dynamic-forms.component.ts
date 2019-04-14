@@ -27,7 +27,6 @@ export class DynamicFormsComponent implements OnInit {
       const validators = !control.validations ? [] :
         control.validations.map(obj => this.validationService.getValidator(obj.validation))
         .filter(v => v);
-      console.log("validators", validators);
       controlsObj[control.id] = new FormControl(undefined, validators);
     });
     this.form = new FormGroup(controlsObj);
