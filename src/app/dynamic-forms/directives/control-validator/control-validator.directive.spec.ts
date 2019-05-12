@@ -1,10 +1,22 @@
 import { ControlValidatorDirective } from './control-validator.directive';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { TestConatinerComponent } from './test-container.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DynamicFormValidationService } from '../../services/dynamic-form-validation.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DynamicControlOptions } from '../../models/dynamic-forms';
+
+@Component({
+  selector: "app-container",
+  template:
+    "<div id='container' [form]='form' [control]='control' appControlValidator></div>"
+})
+export class TestConatinerComponent {
+  public form: FormGroup;
+  public control: DynamicControlOptions;
+  onStatusChange(){
+    //TODO: Add action
+  }
+}
 
 describe('ControlValidatorDirective', () => {
 
