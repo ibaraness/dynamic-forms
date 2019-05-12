@@ -8,6 +8,7 @@ import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { ControlTextInputComponent } from "./components/controls/control-text-input/control-text-input.component";
 import { DynamicFormsControlGroup } from "./models/dynamic-forms";
+import { DynamicFormValidationService } from "./services/dynamic-form-validation.service";
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
@@ -22,7 +23,8 @@ import { DynamicFormsControlGroup } from "./models/dynamic-forms";
     ControlAdapterTextInputComponent,
     DynamicControlDirective,
     DynamicFormsComponent
-  ]
+  ],
+  providers: [DynamicFormValidationService]
 })
 export class TestModule {}
 

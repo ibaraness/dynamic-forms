@@ -1,11 +1,14 @@
-<ng-container *ngIf="form" [formGroup]="form">
+<div *ngIf="form"
+[formGroup]="form" appControlValidator
+(statusChange)="onStatusChange($event)"
+[form]="form" [control]="control">
   <app-control-text-input
   [control]="control"
   [formControlName]="control.id"
   [invalid]="invalid"
   [valid]="touched && !invalid"
   [errorMessage]="errorMessage"
+  [required]="required"
   (blur)="validate()"
-  (input)="onInput($event)"
   ></app-control-text-input>
-</ng-container>
+</div>

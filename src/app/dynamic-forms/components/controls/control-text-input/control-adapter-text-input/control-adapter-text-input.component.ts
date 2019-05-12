@@ -1,10 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, AbstractControl } from "@angular/forms";
-import {
-  DynamicControlOptions,
-  DynamicFormsControlAdapter
-} from "src/app/dynamic-forms/models/dynamic-forms";
-import { DynamicFormValidationService } from "src/app/dynamic-forms/services/dynamic-form-validation.service";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { ControlValidatorDirective } from "src/app/dynamic-forms/directives/control-validator/control-validator.directive";
+import { ControlValidationEvent, DynamicControlOptions, DynamicFormsControlAdapter } from "src/app/dynamic-forms/models/dynamic-forms";
 
 @Component({
   selector: "app-control-adapter-text-input",
@@ -13,34 +10,26 @@ import { DynamicFormValidationService } from "src/app/dynamic-forms/services/dyn
 })
 export class ControlAdapterTextInputComponent
   implements DynamicFormsControlAdapter, OnInit {
+  @ViewChild(ControlValidatorDirective) controlValidator;
   public form: FormGroup;
   public control: DynamicControlOptions;
   public invalid: boolean;
   public errorMessage: string;
-  public touched: boolean;
-
-  constructor(private validationService: DynamicFormValidationService){}
+  public required: boolean;
 
   ngOnInit(): void {
     if (!this.form) {
       throw new Error("form<FormGroup> property must be set!");
     }
+    this.required = this.control.validations && !!this.control.validations.find(valObj => valObj.validation === "required");
   }
 
   validate() {
-    const formControl: AbstractControl = this.form.controls[this.control.id];
-    this.touched = formControl.dirty;
-    if (this.touched && !formControl.valid) {
-      this.errorMessage = this.validationService.getErrorMessages(formControl, this.control.validations);
-      this.invalid = true;
-      return;
-    }
-    this.invalid = false;
+    this.controlValidator.validate();
   }
 
-  onInput(input) {
-    if (this.touched) {
-      this.validate();
-    }
+  onStatusChange(event: ControlValidationEvent) {
+    this.errorMessage = event.errorMessage;
+    this.invalid = event.error;
   }
 }

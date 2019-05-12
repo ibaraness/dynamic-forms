@@ -1,6 +1,7 @@
 import { Validators } from '@angular/forms';
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { DynamicFormsControlGroup } from "./dynamic-forms/models/dynamic-forms";
+import { DynamicFormsComponent } from './dynamic-forms/dynamic-forms.component';
 
 @Component({
   selector: "app-root",
@@ -8,6 +9,8 @@ import { DynamicFormsControlGroup } from "./dynamic-forms/models/dynamic-forms";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
+
+  @ViewChild("dynamicForms") dynamicForms: DynamicFormsComponent;
 
   public controlGroups: DynamicFormsControlGroup[] = [
     {
@@ -45,6 +48,10 @@ export class AppComponent {
           },
           validations: [
             {
+              validation: "required",
+              errorMessage: "This field is required"
+            },
+            {
               validation: "email",
               errorMessage: "Please enter a valid email address"
             }
@@ -58,6 +65,10 @@ export class AppComponent {
             input_type: "password"
           },
           validations: [
+            {
+              validation: "required",
+              errorMessage: "This field is required"
+            },
             {
               validation: "password",
               errorMessage: "Password must contain at least 1 lowercase letter, 1 uppercase letter, 1 digit, and 1 special character"
@@ -76,4 +87,12 @@ export class AppComponent {
       ]
     }
   ];
+
+  submit() {
+    if(this.dynamicForms){
+      const a = this.dynamicForms.getFormData();
+      console.log("submiting", a);
+      return;
+    }
+  }
 }

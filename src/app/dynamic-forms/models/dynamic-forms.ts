@@ -24,6 +24,7 @@ export interface DynamicControlOptions {
 export interface DynamicFormsControlAdapter {
   control: DynamicControlOptions;
   form: FormGroup;
+  validate(): void;
 }
 
 export interface DynamicFormsControlGroup {
@@ -35,4 +36,13 @@ export interface DynamicFormsControlGroup {
 
 export interface ValidationMap {
   [name: string]: Function;
+}
+
+export interface FormValues {
+  [name: string]: any;
+}
+
+export interface ControlValidationEvent {
+  error: boolean;
+  errorMessage: string;
 }

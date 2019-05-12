@@ -1,17 +1,7 @@
-import { CommonModule } from "@angular/common";
-import { Component, NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule
-} from "@angular/forms";
-import { ControlAdapterTextInputComponent } from "../../components/controls/control-text-input/control-adapter-text-input/control-adapter-text-input.component";
-import { ControlTextInputComponent } from "../../components/controls/control-text-input/control-text-input.component";
-import { DynamicFormsComponent } from "../../dynamic-forms.component";
+import { FormControl, FormGroup } from "@angular/forms";
 import { DynamicControlOptions } from "../../models/dynamic-forms";
-import { DynamicControlDirective } from "./dynamic-control.directive";
 import { ConatinerComponent } from "./dynamic-control.directive.spec";
 import { TestModule } from "./test.module";
 

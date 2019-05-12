@@ -2,7 +2,9 @@
     <div class="row">
         <div class="col">
             <h3>Contact From</h3>
-            <app-dynamic-forms [controlGroups]="controlGroups"></app-dynamic-forms>
+            <app-dynamic-forms [controlGroups]="controlGroups" #dynamicForms></app-dynamic-forms>
+            <div>The form was sent!</div>
+            <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
         </div>
         <div class="col"></div>
         <div class="col"></div>

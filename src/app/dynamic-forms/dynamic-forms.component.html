@@ -1,7 +1,10 @@
-<form *ngIf="form && controlGroups">
+<form *ngIf="form && controlGroups" [formGroup]="form">
   <div *ngFor="let group of controlGroups">
-    <ng-container *ngFor="let control of group.controls" appDynamicControl [control]="control" [form]="form"></ng-container>
+    <ng-container *ngFor="let control of group.controls" appDynamicControl [submit$]="submit$" [control]="control" [form]="form"></ng-container>
   </div>
+  <pre>
+    {{ form.value | json }}
+  </pre>
 </form>
 
 

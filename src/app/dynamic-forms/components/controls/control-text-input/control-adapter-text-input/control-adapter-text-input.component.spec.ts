@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { DynamicControlOptions } from "src/app/dynamic-forms/models/dynamic-forms";
 import { ControlAdapterTextInputComponent } from "./control-adapter-text-input.component";
+import { DynamicFormValidationService } from "src/app/dynamic-forms/services/dynamic-form-validation.service";
+import { By } from "@angular/platform-browser";
 
 
 describe("ControlAdapterTextInputComponent", () => {
@@ -16,6 +18,7 @@ describe("ControlAdapterTextInputComponent", () => {
       declarations: [
         ControlAdapterTextInputComponent
       ],
+      providers: [DynamicFormValidationService],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
@@ -29,8 +32,8 @@ describe("ControlAdapterTextInputComponent", () => {
       type: "textbox",
       validations: [
         {
-          type: "required",
-          errorMessage: "You must enter first name"
+          validation: "required",
+          errorMessage: "error message"
         }
       ]
     };
@@ -38,6 +41,7 @@ describe("ControlAdapterTextInputComponent", () => {
     formGroup = new FormGroup({
       [control.id]: new FormControl(undefined, [Validators.required])
     });
+
 
 
   });
@@ -65,9 +69,27 @@ describe("ControlAdapterTextInputComponent", () => {
     expect(test).toThrowError();
   });
 
-  it("should update when control is dirty", () => {
+  // it("should set the correct error-message when control is dirty and invalid", () => {
+  //   component.form = formGroup;
+  //   component.form.controls[control.id].markAsDirty();
+  //   component.control = control;
+  //   spyOn(component, "validate").and.callThrough();
+  //   component.validate();
+  //   fixture.detectChanges();
+  //   expect(component.errorMessage).toEqual("error message");
+  // });
 
-  })
+  // it("should set invalid as false on valid entries", () => {
+  //   component.form = formGroup;
+  //   component.control = control;
+  //   component.invalid = true;
+  //   component.form.controls[control.id].markAsDirty();
+  //   component.form.controls[control.id].setValue("test");
+  //   spyOn(component, "validate").and.callThrough();
+  //   component.validate();
+  //   fixture.detectChanges();
+  //   expect(component.invalid).toBeFalsy();
+  // });
 
 });
 

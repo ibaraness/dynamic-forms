@@ -10,6 +10,7 @@ import { FormGroup } from "@angular/forms";
 import { DynamicControlOptions } from "src/app/dynamic-forms/models/dynamic-forms";
 import { DynamicFormsControlAdapter } from "../../models/dynamic-forms";
 import { dynamicControlAdapters } from "../../config/dynamic-control-adapters.config";
+import { BehaviorSubject } from "rxjs";
 
 @Directive({
   selector: "[appDynamicControl]"
@@ -17,14 +18,21 @@ import { dynamicControlAdapters } from "../../config/dynamic-control-adapters.co
 export class DynamicControlDirective implements OnInit {
   @Input() form: FormGroup;
   @Input() control: DynamicControlOptions;
+  @Input() submit$: BehaviorSubject<boolean>;
+  private instance: DynamicFormsControlAdapter;
 
   constructor(
     private viewContainer: ViewContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.createControl();
+    this.submit$.subscribe(isSubmit => {
+      if (isSubmit && this.instance) {
+        this.instance.validate();
+      }
+    });
   }
 
   createControl() {
@@ -40,5 +48,6 @@ export class DynamicControlDirective implements OnInit {
     const componentRef = this.viewContainer.createComponent(componentFactory);
     componentRef.instance.control = this.control;
     componentRef.instance.form = this.form;
+    this.instance = componentRef.instance;
   }
 }

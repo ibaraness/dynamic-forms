@@ -22,6 +22,7 @@ export class ControlTextInputComponent implements OnInit, DynamicFormsControl {
   @Input() invalid: boolean;
   @Input() valid: boolean;
   @Input() errorMessage: string;
+  @Input() required: boolean;
   public inputValue: string;
   public disabled: boolean;
   public inputType: string;
@@ -34,14 +35,17 @@ export class ControlTextInputComponent implements OnInit, DynamicFormsControl {
     this.inputType = _.property("options.input_type")(this.control) || "text";
   }
 
-  onInput(value) {
-    if (this.onChange) {
+  onInput(value): void {
+    if (this.invalid && this.onChange) {
       this.onChange(value);
     }
     this.input.emit(value);
   }
 
-  onBlur() {
+  onBlur(value: string): void {
+    if (this.onChange) {
+      this.onChange(value);
+    }
     this.blur.emit(true);
   }
 

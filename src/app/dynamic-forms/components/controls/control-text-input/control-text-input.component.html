@@ -1,12 +1,14 @@
 <div *ngIf="control" class="form-group">
-  <label *ngIf="control.title" [for]="control.id">{{control.title}}</label>
+  <label *ngIf="control.title" [for]="control.id"
+  [ngClass]="{'required': required}"
+  >{{control.title}}</label>
   <input
   [type]="inputType"
   class="form-control"
   [attr.disabled]="disabled ? '' : null"
   [value]="inputValue"
   (input)="onInput($event.target.value)"
-  (blur)="onBlur()"
+  (blur)="onBlur($event.target.value)"
   [id]="control.id"
   [placeholder]="control.title"
   [ngClass]="{

@@ -7,6 +7,7 @@ import { ControlTextInputComponent } from "../../components/controls/control-tex
 import { DynamicFormsComponent } from "../../dynamic-forms.component";
 import { DynamicControlOptions } from "../../models/dynamic-forms";
 import { DynamicControlDirective } from "./dynamic-control.directive";
+import { DynamicFormValidationService } from "../../services/dynamic-form-validation.service";
 
 @Component({
   selector: "app-container",
@@ -27,6 +28,7 @@ describe("DynamicControlDirective", () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [ConatinerComponent],
+      providers: [DynamicFormValidationService],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });

@@ -1,6 +1,7 @@
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { DynamicFormsComponent } from "./dynamic-forms.component";
+import { DynamicFormValidationService } from "./services/dynamic-form-validation.service";
 
 describe("DynamicFormsComponent", () => {
   let component: DynamicFormsComponent;
@@ -9,6 +10,7 @@ describe("DynamicFormsComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DynamicFormsComponent],
+      providers: [DynamicFormValidationService],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
