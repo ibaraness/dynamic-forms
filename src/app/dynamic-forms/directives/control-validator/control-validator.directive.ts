@@ -1,13 +1,13 @@
-import { EventEmitter, OnInit } from '@angular/core';
-import { OnDestroy, Input, Output } from '@angular/core';
-import { Directive } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
-import { DynamicControlOptions, ControlValidationEvent } from '../../models/dynamic-forms';
-import { Subscription } from 'rxjs';
-import { DynamicFormValidationService } from '../../services/dynamic-form-validation.service';
+import { EventEmitter, OnInit } from "@angular/core";
+import { OnDestroy, Input, Output } from "@angular/core";
+import { Directive } from "@angular/core";
+import { FormGroup, AbstractControl } from "@angular/forms";
+import { DynamicControlOptions, ControlValidationEvent } from "../../models/dynamic-forms";
+import { Subscription } from "rxjs";
+import { DynamicFormValidationService } from "../../services/dynamic-form-validation.service";
 
 @Directive({
-  selector: '[appControlValidator]'
+  selector: "[appControlValidator]"
 })
 export class ControlValidatorDirective implements OnInit, OnDestroy {
   @Input() form: FormGroup;

@@ -1,7 +1,6 @@
-import { Validators } from '@angular/forms';
 import { Component, ViewChild } from "@angular/core";
+import { DynamicFormsComponent } from "./dynamic-forms/dynamic-forms.component";
 import { DynamicFormsControlGroup } from "./dynamic-forms/models/dynamic-forms";
-import { DynamicFormsComponent } from './dynamic-forms/dynamic-forms.component';
 
 @Component({
   selector: "app-root",
@@ -89,7 +88,7 @@ export class AppComponent {
   ];
 
   submit() {
-    if(this.dynamicForms){
+    if (this.dynamicForms) {
       const a = this.dynamicForms.getFormData();
       console.log("submiting", a);
       return;

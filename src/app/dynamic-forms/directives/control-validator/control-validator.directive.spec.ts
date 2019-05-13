@@ -1,9 +1,9 @@
-import { ControlValidatorDirective } from './control-validator.directive';
-import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { DynamicFormValidationService } from '../../services/dynamic-form-validation.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { DynamicControlOptions } from '../../models/dynamic-forms';
+import { ControlValidatorDirective } from "./control-validator.directive";
+import { TestBed, ComponentFixture } from "@angular/core/testing";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { DynamicFormValidationService } from "../../services/dynamic-form-validation.service";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { DynamicControlOptions } from "../../models/dynamic-forms";
 
 @Component({
   selector: "app-container",
@@ -13,12 +13,12 @@ import { DynamicControlOptions } from '../../models/dynamic-forms';
 export class TestConatinerComponent {
   public form: FormGroup;
   public control: DynamicControlOptions;
-  onStatusChange(){
-    //TODO: Add action
+  onStatusChange() {
+    // TODO: Add action
   }
 }
 
-describe('ControlValidatorDirective', () => {
+describe("ControlValidatorDirective", () => {
 
   let fixture: ComponentFixture<TestConatinerComponent>;
   let container: TestConatinerComponent;

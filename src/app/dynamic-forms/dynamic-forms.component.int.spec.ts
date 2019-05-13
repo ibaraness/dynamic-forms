@@ -2,7 +2,9 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { DynamicFormsComponent } from "./dynamic-forms.component";
 import { DynamicControlDirective } from "./directives/dynamic-control/dynamic-control.directive";
-import { ControlAdapterTextInputComponent } from "./components/controls/control-text-input/control-adapter-text-input/control-adapter-text-input.component";
+import {
+  ControlAdapterTextInputComponent
+} from "./components/controls/control-text-input/control-adapter-text-input/control-adapter-text-input.component";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
@@ -26,7 +28,7 @@ import { DynamicFormValidationService } from "./services/dynamic-form-validation
   ],
   providers: [DynamicFormValidationService]
 })
-export class TestModule {}
+export class TestModule { }
 
 describe("DynamicFormsComponent Int", () => {
   let component: DynamicFormsComponent;
