@@ -90,7 +90,7 @@ export class AppComponent {
   submit() {
     if (this.dynamicForms) {
       const a = this.dynamicForms.getFormData();
-      console.log("submiting", a);
+      console.log("submiting test", a);
       return;
     }
   }
